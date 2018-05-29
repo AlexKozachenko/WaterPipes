@@ -9,7 +9,6 @@ namespace WaterPipes
             Color = ConsoleColor.White;
             Letter = 'O';
             IsActive = true;
-            IsFull = false;
         }
     }
 }

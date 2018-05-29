@@ -2,13 +2,11 @@
 
 namespace WaterPipes
 {
-    internal class FilledPipeCell : Cell
+    internal class FilledPipeCell : PipeCell
     {
         public FilledPipeCell()
         {
             Color = ConsoleColor.Blue;
-            Letter = 'O';
-            IsActive = true;
             IsFull = true;
         }
     }

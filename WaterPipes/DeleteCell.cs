@@ -4,7 +4,7 @@ namespace WaterPipes
 {
     internal class DeleteCell : Key
     {
-        private Cell[,] buffer;
+        private Cell[,] buffer = null;
      
         public DeleteCell()
         {
