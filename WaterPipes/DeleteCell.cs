@@ -31,6 +31,6 @@ namespace WaterPipes
             }
             pipes.TestClear();
             return true;
-            }
-        }   
-    }
+        }
+    }   
+}
