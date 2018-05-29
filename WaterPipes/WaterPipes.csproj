@@ -40,8 +40,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="AddPipe.cs" />
+    <Compile Include="AddSource.cs" />
+    <Compile Include="Cell.cs" />
+    <Compile Include="DeleteCell.cs" />
+    <Compile Include="ExitInput.cs" />
+    <Compile Include="FilledPipeCell.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="Keyboard.cs" />
+    <Compile Include="KeyRead.cs" />
+    <Compile Include="MainWaterPipes.cs" />
+    <Compile Include="MoveDown.cs" />
+    <Compile Include="MoveLeft.cs" />
+    <Compile Include="MoveRight.cs" />
+    <Compile Include="MoveUp.cs" />
+    <Compile Include="PipeCell.cs" />
+    <Compile Include="Pipes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceCell.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
