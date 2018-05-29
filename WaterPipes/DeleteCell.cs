@@ -16,6 +16,7 @@ namespace WaterPipes
             buffer = new Cell[pipes.FieldHeight, pipes.FieldWidth];
             pipes.InitializeField(buffer);
             pipes.CopyField(pipes.Field, buffer);
+            //ордината смещается вниз за счет счетчика поколений, поднимаем на 1
             if (pipes.Field[pipes.CellOrdinateY - 1, pipes.CellAbscissaX].IsActive)
             {
                 pipes.Field[pipes.CellOrdinateY - 1, pipes.CellAbscissaX] = new Cell();
