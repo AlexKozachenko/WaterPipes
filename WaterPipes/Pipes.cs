@@ -4,25 +4,24 @@ using System.Threading;
 namespace WaterPipes
 {
     public delegate void Operation(int y, int x);
-
+    
     internal class Pipes
     {
-        private Cell[,] bufferField;
+        // к каждой размерности поля из задания прибавляется 2 за счет рамки
+        private const int fieldHeight = 17;
+        private const int fieldWidth = 32;
+        private const int speed = 400;
+        private Cell[,] bufferField = new Cell[fieldHeight, fieldWidth];
         // координаты начальной точки (верхний левый угол поля) с учетом счетчика шагов и рамки
         private int cellAbscissaX = 1;
         private int cellOrdinateY = 2;
-        private Cell[,] field;
-        // к каждой размерности поля из задания прибавляется 2 за счет рамки
-        private int fieldHeight = 17;
-        private int fieldWidth = 32;
-        private int speed = 400;
+        private Cell[,] field = new Cell[fieldHeight, fieldWidth];
+        private Operation lambda;
         private int step = 0;
 
         public Pipes()
         {
-            field = new Cell[fieldHeight, fieldWidth];
             InitializeField(field);
-            bufferField = new Cell[fieldHeight, fieldWidth];
             InitializeField(bufferField);
         }
 
@@ -159,13 +158,14 @@ namespace WaterPipes
         public int CountActiveNeighbours(int y, int x)
         {
             int activeNeighbors = 0;
-            Bypass(y, x, (ordinate, abscissa) =>
+            lambda = (ordinate, abscissa) =>
             {
                 if (field[ordinate, abscissa].IsActive)
                 {
                     activeNeighbors++;
                 }
-            });
+            };
+            Bypass(y, x, lambda);
             return activeNeighbors;
         }
 
@@ -203,14 +203,13 @@ namespace WaterPipes
 
         public void Game()
         {
-            do
+            while (Filling()) 
             {
                 Thread.Sleep(speed);
                 CopyField(field, bufferField);
-                Filling();
                 PrintField();
                 step++;
-            } while (!CompareFields(field, bufferField));
+            } 
         }
 
         public void InitializeField(Cell[,] field)
@@ -224,7 +223,7 @@ namespace WaterPipes
             }
         }
 
-        private void Filling()
+        private bool Filling()
         {
             for (int i = 1; i < fieldHeight - 1; i++)
             {
@@ -232,16 +231,18 @@ namespace WaterPipes
                 {
                     if (bufferField[i, j].IsFull)
                     {
-                        Bypass(i, j, (ordinate, abscissa) =>
+                        lambda = (ordinate, abscissa) =>
                         {
                             if ((!field[ordinate, abscissa].IsFull) && (field[ordinate, abscissa].IsActive))
                             {
                                 field[ordinate, abscissa] = new FilledPipeCell();
                             }
-                        });
+                        };
+                        Bypass(i, j, lambda);
                     }
                 }
             }
+            return !CompareFields(field, bufferField);
         }
 
         private void PrintField()
@@ -276,11 +277,12 @@ namespace WaterPipes
 
         public void Test()
         {
+            bool filling;
             do
             {
                 CopyField(Field, BufferField);
-                Filling();
-            } while (!CompareFields(Field, BufferField));
+                filling = Filling();
+            } while (filling);
         }
 
         public void TestClear()
