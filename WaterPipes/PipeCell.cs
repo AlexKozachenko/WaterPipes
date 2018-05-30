@@ -7,8 +7,8 @@ namespace WaterPipes
         public PipeCell()
         {
             Color = ConsoleColor.White;
-            Letter = 'O';
             IsActive = true;
+            Letter = 'O';
         }
     }
 }

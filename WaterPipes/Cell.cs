@@ -5,15 +5,15 @@ namespace WaterPipes
     internal class Cell
     {
         private ConsoleColor color;
-        private char letter;
         private bool isActive;
         private bool isFull;
+        private char letter;
 
         public Cell()
         {
-            letter = ' ';
             isActive = false;
             isFull = false;
+            letter = ' ';
         }
 
         public ConsoleColor Color

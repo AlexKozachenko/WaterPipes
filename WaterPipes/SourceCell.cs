@@ -7,9 +7,9 @@ namespace WaterPipes
         public SourceCell()
         {
             Color = ConsoleColor.Yellow;
-            Letter = 'S';
             IsActive = true;
             IsFull = true;
+            Letter = 'S';
         }
     }
 }
