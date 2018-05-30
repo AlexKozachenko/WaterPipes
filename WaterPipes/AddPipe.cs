@@ -11,7 +11,7 @@ namespace WaterPipes
 
         public override bool Action(Pipes pipes)
         {
-            //ордината смещается вниз за счет счетчика поколений, поднимаем на 1
+            //ордината смещается вниз за счет счетчика шагов, поднимаем на 1
             if (!(pipes.Field[pipes.CellOrdinateY - 1, pipes.CellAbscissaX].IsActive)
                 && (pipes.CountActiveNeighbours(pipes.CellOrdinateY - 1, pipes.CellAbscissaX) > 0))
             {
