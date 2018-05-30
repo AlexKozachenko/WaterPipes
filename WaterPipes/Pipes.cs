@@ -101,10 +101,6 @@ namespace WaterPipes
                         neighborCells[neighborCellIndex, xBuffer] = j;
                         neighborCellIndex++;
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
             }
             for (int i = 0; i < maxCountOfNeighborCells; i++)
