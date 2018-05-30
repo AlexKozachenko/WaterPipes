@@ -199,13 +199,14 @@ namespace WaterPipes
 
         public void Game()
         {
-            while (Filling()) 
+            do
             {
                 Thread.Sleep(speed);
                 CopyField(field, bufferField);
                 PrintField();
+                Filling();
                 step++;
-            } 
+            } while (!CompareFields(field, bufferField));
         }
 
         public void InitializeField(Cell[,] field)
@@ -219,7 +220,7 @@ namespace WaterPipes
             }
         }
 
-        private bool Filling()
+        private void Filling()
         {
             for (int i = 1; i < fieldHeight - 1; i++)
             {
@@ -238,7 +239,6 @@ namespace WaterPipes
                     }
                 }
             }
-            return !CompareFields(field, bufferField);
         }
 
         private void PrintField()
@@ -273,12 +273,11 @@ namespace WaterPipes
 
         public void Test()
         {
-            bool filling;
             do
             {
                 CopyField(Field, BufferField);
-                filling = Filling();
-            } while (filling);
+                Filling();
+            } while (!CompareFields(field, bufferField));
         }
 
         public void TestClear()
