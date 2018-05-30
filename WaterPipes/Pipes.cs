@@ -7,12 +7,13 @@ namespace WaterPipes
 
     internal class Pipes
     {
-        private int activeNeighbours;
+        private int activeNeighbors;
         private Cell[,] bufferField;
         // координаты начальной точки (верхний левый угол поля) с учетом счетчика шагов и рамки
         private int cellAbscissaX = 1;
         private int cellOrdinateY = 2;
         private Cell[,] field;
+        // к каждой размерности поля из задания прибавляется 2 за счет рамки
         private int fieldHeight = 17;
         private int fieldWidth = 32;
         private int speed = 400;
@@ -79,7 +80,7 @@ namespace WaterPipes
         {
             if (field[y, x].IsActive)
             {
-                activeNeighbours++;
+                activeNeighbors++;
             }
         }
 
@@ -118,11 +119,11 @@ namespace WaterPipes
             }
             for (int i = 0; i < maxCountOfNeighborCells; i++)
             {
-                if (neighborCells[i, xBuffer] < 1 || neighborCells[i, yBuffer] < 1)
+                if ((neighborCells[i, xBuffer] < 1) || (neighborCells[i, yBuffer] < 1))
                 {
                     continue;
                 }
-                if (neighborCells[i, xBuffer] > fieldWidth - 1 || neighborCells[i, yBuffer] > fieldHeight - 1)
+                if ((neighborCells[i, xBuffer] > fieldWidth - 1) || (neighborCells[i, yBuffer] > fieldHeight - 1))
                 {
                     continue;
                 }
@@ -137,10 +138,10 @@ namespace WaterPipes
             {
                 for (int j = 0; j < fieldWidth; j++)
                 {
-                    if (field1[i, j].Color != field2[i, j].Color
-                        || field1[i, j].IsActive != field2[i, j].IsActive
-                        || field1[i, j].IsFull != field2[i, j].IsFull
-                        || field1[i, j].Letter != field2[i, j].Letter)
+                    if ((field1[i, j].Color != field2[i, j].Color)
+                        || (field1[i, j].IsActive != field2[i, j].IsActive)
+                        || (field1[i, j].IsFull != field2[i, j].IsFull)
+                        || (field1[i, j].Letter != field2[i, j].Letter))
                     {
                         isEqual = false;
                         break;
@@ -166,10 +167,10 @@ namespace WaterPipes
 
         public int CountActiveNeighbours(int y, int x)
         {
-            activeNeighbours = 0;
+            activeNeighbors = 0;
             Operation operation = ActiveNeighbors;
             Bypass(y, x, operation);
-            return activeNeighbours;
+            return activeNeighbors;
         }
 
         public int CountActives()
@@ -206,7 +207,7 @@ namespace WaterPipes
 
         private void Fill(int y, int x)
         {
-            if (!field[y, x].IsFull && field[y, x].IsActive)
+            if ((!field[y, x].IsFull) && (field[y, x].IsActive))
             {
                 field[y, x] = new FilledPipeCell();
             }
@@ -269,7 +270,7 @@ namespace WaterPipes
             {
                 for (int j = 0; j < fieldWidth; j++)
                 {
-                    if (i == 0 || j == 0 || j == fieldWidth - 1 || i == fieldHeight - 1)
+                    if ((i == 0) || (j == 0) || (j == fieldWidth - 1) || (i == fieldHeight - 1))
                     {
                         Console.Write(frameElement);
                     }
