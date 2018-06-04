@@ -1,4 +1,5 @@
-﻿using System;
+﻿// загрузка на mystat
+using System;
 using System.Threading;
 
 namespace WaterPipes
